@@ -43,6 +43,10 @@ Utlisateur.init({
         type : DataTypes.STRING,
         // allowNull :false
     },
+    note : {
+        type : DataTypes.STRING,
+        // allowNull :false
+    },
     role : {
         type : DataTypes.STRING ,
         type : DataTypes.ENUM,

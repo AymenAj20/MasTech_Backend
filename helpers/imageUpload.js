@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
       if (isValid) {
           uploadError = null;
       }
-      cb(uploadError, 'public/uploads/plans');
+      cb(uploadError, 'public/uploads/images');
   },
   filename: function (req, file, cb) {
       const fileName = file.originalname.split(' ').join('-');
@@ -31,7 +31,8 @@ const storage = multer.diskStorage({
 // Méthode pour supprimer une image
 exports.deleteImage = function (imageUrl) {
   const fileName = imageUrl.split("/").pop(); 
-  const imagePath = `public/uploads/plans/${fileName}`;
+  console.log(fileName);
+  const imagePath = `public/uploads/images/${fileName}`;
 
   fs.unlink(imagePath, (err) => {
     if (err) {

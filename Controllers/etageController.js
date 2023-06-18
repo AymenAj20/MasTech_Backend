@@ -77,6 +77,10 @@ exports.getPlan = async function (req,res) {
       return res.status(404).send({ message: "Etage non trouvé" });
     }
 
+    if (!etage.Plan) {
+      return res.status(404).send({ message: "Etage en possede pas de plan" });
+    }
+
     res.status(200).send(etage.Plan);
   } catch (error) {
     console.error(error);

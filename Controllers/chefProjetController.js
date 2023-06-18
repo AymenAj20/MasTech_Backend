@@ -1,7 +1,6 @@
 const User = require("../Models/utilisateur");
 const Chantier = require("../Models/chantier");
 const bcrypt = require("bcryptjs");
-const imageUpload = require('../helpers/imageUpload')
 
 
 const chantierController = require('../Controllers/chantierController');
@@ -185,54 +184,7 @@ exports.getChantierById = async function (req, res) {
   }
 };
 
-// Methode de modification d'un chefProjet
-exports.updateChefProjet = async function (req, res) {
-  const file = req.file;
-    if (!file) return res.status(400).send('No image in the request'); 
-    const fileName = file.filename;
-    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
-  if(req.body.password){
-   updatedUser = {
-    nom: req.body.nom,
-    prenom: req.body.prenom,
-    email: req.body.email,
-    imageURL: `${basePath}${fileName}`,
-    numTel: req.body.numTel,
-    role: req.body.role,
-    passwordHash: bcrypt.hashSync(req.body.password, 10),
-    cin: req.body.cin,
-  };
-}else {
-   updatedUser = {
-    nom: req.body.nom,
-    prenom: req.body.prenom,
-    email: req.body.email,
-    imageURL: `${basePath}${fileName}`,
-    numTel: req.body.numTel,
-    role: req.body.role,
-    cin: req.body.cin,
-  };
-}
-  try { 
-    // Vérifier que le chef de projet existe
-    const chefProjet = await isChefProjet(req.params.id);
-    if (!chefProjet) {
 
-
-      return res.status(404).send({ message: "Chef de projet non trouvé"});
-    }
-
-
-    // Mettre à jour le chef de projet
-    //supprimer ancienne image 
-    imageUpload.deleteImage(chefProjet.imageURL);
-    await chefProjet.update(updatedUser);
-    
-    return res.status(200).send({message:'chefProjet modifiée avec succès' });
-  } catch (error) {
-    return res.status(404).send({ message: err});
-  }
-};
 
 
 

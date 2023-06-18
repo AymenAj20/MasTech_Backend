@@ -11,7 +11,7 @@ exports.findAll = async function (req, res) {
     if (!chantierList) {
       return res.status(404).send({ message: "Liste des Chantiers Vide !!" });
     }
-    
+     
 
     return res.status(200).send(chantierList);
   } catch (error) {

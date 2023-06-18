@@ -3,8 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const DB = require("./db/dbConnect");
 const cors = require("cors");
-//const authController = require('./Controllers/authController')
-//const errorHandler = require('./helpers/error-handler')
+
 
 //Fichier envirennement
 require("dotenv/config");
@@ -25,7 +24,7 @@ app.use(morgan("tiny"));
 //Gestion des errors detectés
 //app.use(errorHandler)
 //Declarer le dossier comme static folder pour stocker les images
-app.use("/public/uploads", express.static(__dirname + "/public/uploads/plans"))
+app.use("/public/uploads", express.static(__dirname + "/public/uploads/images"))
 
 // Les routes
 const authRouter = require("./Routes/authRouter");
@@ -46,8 +45,8 @@ app.use(`${API}/auth`, authRouter);
 app.use(`${API}/admin`, adminRouter);
 app.use(`${API}/chefProjets`,chefProjetRouter);
 app.use(`${API}/chantiers`, /*authController.setRole('chefProjet','Admin'),authController.verifyToken,*/chantierRouter);
-app.use(`${API}/etages`, authController.setRole('chefProjet','Admin'),authController.verifyToken,etageRouter);
-app.use(`${API}/elements`,/*authController.setRole('chefProjet'),authController.verifyToken,*/elementRouter);
+app.use(`${API}/etages`, etageRouter);
+app.use(`${API}/elements`,authController.setRole('chefProjet'),authController.verifyToken,elementRouter);
 app.use(`${API}/plans`,planRouter);
 app.use(`${API}/taches`,tacheRouter);
 app.use(`${API}/chefChantiers`,chefChantierRouter);

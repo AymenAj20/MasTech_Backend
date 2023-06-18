@@ -20,7 +20,7 @@ const FILE_TYPE_MAP = {
           if (isValid) {
               uploadError = null;
           }
-          cb(uploadError, 'public/uploads/plans');
+          cb(uploadError, 'public/uploads/images');
       },
       filename: function (req, file, cb) {
           const fileName = file.originalname.split(' ').join('-');

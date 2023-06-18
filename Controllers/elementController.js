@@ -62,7 +62,6 @@ exports.updateElement = async function (req, res) {
       surface: surface || element.surface,
       phase: req.body.phase || element.phase,
     };
-    console.log(newElement);
     await element.update(newElement);
     return res.status(200).send({ message: "Element modifié avec succès" });
   } catch (error) {
@@ -99,7 +98,6 @@ exports.affecterZone = async function (req, res) {
 
     // Affectation de ID du chefProjet au champ ChefProjetId du class Projet
     await element.update({ affecte: true });
-    console.log(element);
     res.send({
       message: "Element modifié",
       element: element,
